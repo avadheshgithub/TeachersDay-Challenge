@@ -1,0 +1,19 @@
+// Valid Palindrom
+// Leetcode 125
+
+class Solution {
+public:
+    bool isPalindrome(string s) {
+        if(s.empty()) return true;
+        transform(s.begin(),s.end(),s.begin(),::tolower);
+        string result;  
+        for(char c:s){
+            if(isalnum(c)){
+                result += c;
+            }
+        }
+        string rev = result;
+        reverse(rev.begin(),rev.end());
+        return (rev==result);
+    }
+};
