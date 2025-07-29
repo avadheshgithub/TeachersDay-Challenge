@@ -1,0 +1,75 @@
+// Valid Anagram
+// Leetcode 242
+
+---------------------------------------------------
+
+Methode 01 - using sorting
+
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+        sort(s.begin(),s.end());
+        sort(t.begin(),t.end());
+        return s==t;
+    }
+};
+
+
+--------------------------------------------------
+
+methode 02 - using Arr
+
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+        if (s.length() != t.length()) return false;
+        int count[26] = {0};
+        for (int i = 0; i < s.length(); i++) {
+            count[s[i] - 'a']++;
+            count[t[i] - 'a']--;
+        }
+        for (int x : count) {
+            if (x != 0) return false;
+        }
+        return true;
+    }
+};
+
+
+------------------------------------------------
+methode 03 - using one map
+
+
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+        if(s.length()!=t.length()) return false;
+        map<char,int>mp;
+        for(auto x:s) mp[x]++;
+        for(auto x:t) mp[x]--;
+        for(auto x:mp){
+            if(x.second != 0) return false;
+        }
+        return true;
+    }
+};
+
+----------------------------------------------------
+
+// methode 04 - using two Map
+
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+        if(s.length()!=t.length()) return false;
+        map<char,int>mp1;
+        map<char,int>mp2;
+        for(auto x:s) mp1[x]++;
+        for(auto x:t) mp2[x]++;
+        if(mp1.size()!=mp2.size()) return false;
+        for(auto x:mp1){
+            if(mp2[x.first]!=x.second) return false;
+        }
+        return true;
+    }
+};
