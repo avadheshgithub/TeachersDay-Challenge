@@ -1,0 +1,59 @@
+// Merge Two Sorted List
+// Leetcode - 21
+
+----------------------------------------------------------
+Methode 01 - using Extra Space
+
+class Solution {
+public:
+    ListNode* mergeTwoLists(ListNode* head1, ListNode* head2) {
+        ListNode* tempA = head1;
+        ListNode* tempB = head2;
+        ListNode* head3 = new ListNode(100);
+        ListNode* tempC = head3;
+        while(tempA !=NULL && tempB!=NULL){
+            if(tempA->val<=tempB->val){
+                ListNode* t = new ListNode(tempA->val);
+                tempC->next =t;
+                tempC = t; 
+                tempA = tempA->next;
+            }
+            else{
+                ListNode* t = new ListNode(tempB->val);
+                tempC->next =t;
+                tempC = t; 
+                tempB = tempB->next;
+            }
+        }
+        if(tempA==NULL) tempC->next = tempB;
+        else tempC->next = tempA;
+        return head3->next;
+    }
+};
+
+---------------------------------------------------------------
+
+Methode 02 - without extra space
+
+class Solution {
+public:
+    ListNode* mergeTwoLists(ListNode* a, ListNode* b) {
+        ListNode* c = new ListNode(100);
+        ListNode* temp = c;
+        while(a!=NULL && b!=NULL){
+            if(a->val <= b->val){
+                temp->next = a;
+                a = a->next;
+                temp = temp->next;
+            }
+            else {
+                temp->next = b;
+                b = b->next;
+                temp = temp->next;
+            }
+        }
+        if(a==NULL) temp->next = b;
+        else temp->next = a;
+        return c->next;
+    }
+};
