@@ -1,0 +1,54 @@
+// Remove Nth Node From ENd of Linked List
+// Leetcode - 19
+
+---------------------------------------------------------
+
+// MEthode 01 - General Approach
+
+class Solution {
+public:
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+        ListNode* temp = head;
+        int size = 0;
+        while(temp!=NULL){
+            size++;
+            temp = temp->next;
+        }
+        if(size==n){
+            head = head->next;
+            return head;
+        }
+        int idx = size-n+1;
+        temp = head;
+        for(int i=1;i<idx-1;i++){
+            temp = temp->next;
+        }
+        temp->next = temp->next->next;
+        return head;
+    }
+};
+
+---------------------------------------------------------------
+
+// Methode 02 - slow and fast Approach
+
+class Solution {
+public:
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+        ListNode* slow = head;
+        ListNode* fast = head;
+        for(int i=1;i<=n;i++){
+            fast = fast->next;
+        }
+        if(fast==NULL){
+            head = head->next;
+            return head;
+        }
+        while(fast->next != NULL){
+            fast = fast->next;
+            slow = slow->next;
+        }
+        slow->next = slow->next->next;
+        return head;
+    }
+};
