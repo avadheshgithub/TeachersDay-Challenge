@@ -1,0 +1,36 @@
+// Reverse the Linked List
+
+-----------------------------------------------------------------------
+// Methode 01 - using pointers
+
+
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        ListNode* prev = NULL;
+        ListNode* curr = head;
+        ListNode* next = NULL;
+
+        while(curr!=NULL){
+            next = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = next;
+        }
+        return prev;
+    }
+};
+
+-------------------------------------------------------------------------
+// Methode 02 - using recursion
+
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        if (head==NULL || head->next==NULL) return head;
+        ListNode* newHead = reverseList(head->next);// Recursively reverse the rest
+        head->next->next = head;// Reverse the link for current node
+        head->next = NULL;
+        return newHead;
+    }
+};
