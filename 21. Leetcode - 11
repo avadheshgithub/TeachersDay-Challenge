@@ -1,0 +1,41 @@
+// Containwe With Most Water
+// Leetcode - 11
+
+-----------------------------------------------------
+// Methode 01 - Two Pointer
+
+class Solution {
+public:
+    int maxArea(vector<int>& height) {
+        int left = 0;
+        int right = height.size()-1;
+
+        int maxi=0;
+        while(left<right){
+            int width = right-left;
+            int heigh = min(height[left],height[right]);
+            maxi = max(maxi,heigh*width);
+            if(height[left]<height[right]) left++;
+            else right--;
+        }
+        return maxi;
+    }
+};
+--------------------------------------------------------
+
+// Methode 02 - BRUTE FORCE APPROACH
+
+class Solution {
+public:
+    int maxArea(vector<int>& height) {
+        int n = height.size();
+        int maxi = 0;
+        for(int i=0;i<n;i++){
+            for(int j=i+1;j<n;j++){
+                int area = (j-i)*min(height[i],height[j]); // width*height
+                maxi = max(maxi,area);
+            }
+        } 
+        return maxi;
+    }
+};

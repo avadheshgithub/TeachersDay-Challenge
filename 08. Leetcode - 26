@@ -1,0 +1,41 @@
+// Remove Duplicates from Sorted Array -
+// Leetcode 26
+
+
+// Methode 01 - Two Pointer Approach
+
+class Solution {
+public:
+    int removeDuplicates(vector<int>& nums) {
+        int n = nums.size();
+        int i = 1;
+        int j = 1;
+        while(i<n){
+            if(nums[i]!=nums[j-1]){
+                nums[j]=nums[i];
+                j++;
+            }
+            i++;
+        }
+        return j;
+    }
+};
+
+
+
+
+// Methode 02 - linear Methode
+
+class Solution {
+public:
+    int removeDuplicates(vector<int>& nums) {
+        int k = 1;
+        for (int i = 1; i < nums.size(); i++) {
+            if (nums[i] != nums[k-1]) { 
+                nums[k] = nums[i]; 
+                k++; 
+            }
+        }
+        return k;
+    }
+};
